@@ -1,17 +1,15 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
-@section('title-block')Продукт @endsection
+@section('title') Продукт@endsection
 
 @section('content')
-<div class="row">
-    <div class="starter-template">
-        <h1>{{ $products }}</h1>
-        <h2></h2>
-        <p>Цена: <b>71990 ₽</b></p>
-        <img src="http://internet-shop.tmweb.ru/storage/products/iphone_x.jpg">
-        <p>Отличный продвинутый телефон с памятью на 64 gb</p>
-
-    </div>
-
-</div>
+    <h1>{{ $product->__('name') }}</h1>
+    <p>{{ $product->category->__('name') }}</p>
+    <p>@lang('basket.price'): <b>{{ $product->price }} руб.</b></p>
+    <img src="{{Storage::url($product->image)}}">
+    <p>{{ $product->__('description') }}</p>
+    <form action="{{ route('basket-add', $product) }}" method="post">
+    @csrf
+    <button type="submit" role="button" class="btn btn-success">@lang('main.add_to_basket')</button>
+    </form>
 @endsection

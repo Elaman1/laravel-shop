@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Auth;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -20,6 +22,13 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+    protected function redirectTo() {
+        if (Auth::user()->isAdmin()  ) {
+            return route('home');
+        }
+        return route('person.orders.index');
+    }
+
     /**
      * Where to redirect users after login.
      *
@@ -35,5 +44,6 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+        $this->middleware('set_locale')->except('login');
     }
 }
