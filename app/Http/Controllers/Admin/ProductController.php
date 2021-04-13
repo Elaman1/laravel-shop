@@ -19,7 +19,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(10);
+        $products = Product::query()->orderBy('id', 'desc')->paginate(10);
+        return view('auth.products.index', compact('products'));
+    }
+    
+    public function search(Request $request) {
+        $text_input = $_POST['text_input'];
+        $products = Product::query()->orderBy('id', 'desc')->where('name', 'LIKE', '%' . $text_input . '%')->paginate(10);
+        
         return view('auth.products.index', compact('products'));
     }
 
@@ -42,17 +49,14 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        // $path = $request->file('image')->store('products');
-        // $params = $request->all();
-        // $params['image'] = $path;
-
+        // Сохранение картинки
+        
         $params = $request->all();
         unset($params['image']);
         if ($request->has('image')) {
             $params['image'] = $request->file('image')->store('products');
         }
-
-
+    
         Product::create($params);
         return redirect()->route('products.index');
     }
@@ -90,21 +94,17 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Product $product)
     {
-        // Storage::delete($product->image);
-        // $path = $request->file('image')->store('product');
-        // $params = $request->all();
-        // $params['image'] = $path;
-
         $params = $request->all();
+        
+        // Сохрание картинок
+        
         unset($params['image']);
         if ($request->has('image')) {
             Storage::delete($product->image);
             $params['image'] = $request->file('image')->store('products');
         }
 
-
-
-        foreach(['new', 'hit', 'recommend'] as $fieldName) {
+        foreach(['neww', 'amulet'] as $fieldName) {
             if (!isset($params[$fieldName])) {
                 $params[$fieldName] = 0;
             }

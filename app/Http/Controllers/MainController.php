@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductFull;
 use App\Models\Currency;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductsFilterRequest;
@@ -11,27 +12,32 @@ use App;
 
 class MainController extends Controller
 {
-    public function index(ProductsFilterRequest $request) {
+    public function index() {
+        return view('index');
+    }
 
-        $productsQuery = Product::query();
+    public function contact() {
+        return view('contact');
+    }
 
-        if($request->filled('price_from')) {
-            $productsQuery->where('price', '>=', $request->price_from);
-        }
-        if($request->filled('price_to')) {
-            $productsQuery->where('price', '<=', $request->price_to);
-        }
-
-        foreach(['hit', 'new', 'recommend'] as $field) {
-            if ($request->has($field)) {
-                $productsQuery->$field();
-            }
-        }
-
+    public function store() {
+        $categories = Category::query()->orderBy('id', 'desc')->get();
         
+        return view('store', compact('categories'));
+    }
 
-        $products = $productsQuery->paginate(6)->withPath('?'.$request->getQueryString());
-        return view('index', compact('products'));
+    public function amulet() {
+        $amulets = Product::query()->where('amulet', '1')->orderBy('id', 'desc')->get();
+        return view('amulet', compact('amulets'));
+    }
+
+    public function newProduct() {
+        $newProducts = Product::query()->where('neww', '1')->orderBy('id', 'desc')->get();
+        return view('newProduct', compact('newProducts'));
+    }
+
+    public function free() {
+        return view('free');
     }
 
     public function changeLocale($locale) {
@@ -42,7 +48,7 @@ class MainController extends Controller
     }
 
     public function categories() {
-        $categories = Category::get();
+        $categories = Category::query()->orderBy('id', 'desc')->get();
         return view('categories', compact('categories'));
     }
 
@@ -55,6 +61,19 @@ class MainController extends Controller
         $product = Product::byCode($productCode)->firstOrFail();
         return view('product', compact('product'));
     }
+    
+    public function productFull($category, $productCode ) {
+        $product = ProductFull::byCode($productCode)->firstOrFail();
+        return view('productFull', compact('product'));
+    }
+    
+    public function transportation() {
+        return view('transportation');
+    }
+    
+    public function reviews() {
+        return view('reviews');
+    }
 
     public function changeCurrency($currencyCode) {
         
@@ -62,4 +81,6 @@ class MainController extends Controller
         session(['currency' => $currencyCode]);
         return redirect()->back();
     }
+
+    
 }

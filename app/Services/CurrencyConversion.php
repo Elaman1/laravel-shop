@@ -20,6 +20,8 @@ class CurrencyConversion
     }
 
     public static function getCurrencySymbol() {
-        return session('currency', 'KZT');
+        $currency = Currency::byCode(session('currency', 'KZT'));
+        dd($currency->symbol);
+        return $currency->symbol;
     }
 }

@@ -45,9 +45,9 @@
             </tr>
             <tr>
                 <td>Категория</td>
-                <td>{{ $product->category->name }}</td>
+                <td>@isset( $product->category ) {{ $product->category->name }} @else Нету категории @endisset</td>
             </tr>
-            <tr>
+            <!-- <tr>
                 <td>Лейблы</td>
                 <td>
                 @if($product->isNew())
@@ -60,6 +60,20 @@
 
                 @if($product->isHit())
                     <span class="badge badge-danger">Хит продаж</span>
+                @endif
+                </td>
+                
+            </tr> -->
+
+            <tr>
+                <td>Разделы</td>
+                <td>
+                @if($product->isNeww())
+                    <span class="badge badge-success">Новинка</span>
+                @endif
+
+                @if($product->isAmulet())
+                    <span class="badge badge-danger">Новые амулеты</span>
                 @endif
                 </td>
                 

@@ -2,9 +2,10 @@
 
 namespace App\Classes;
 
+use Mail;
 use App\Models\Order;
 use App\Models\Product;
-use Mail;
+use App\Models\ProductFull;
 use App\Mail\OrderCreated;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,6 +27,8 @@ class Basket
         } else {
             $this->order = Order::findOrFail($orderId);
         }
+        
+        
 
     }
 
@@ -51,6 +54,18 @@ class Basket
             }
         }
     }
+    
+    public function removeProductFull(ProductFull $product) {
+        if ($this->order->products_fulls->contains($product->id)) {
+            $pivotRow = $this->order->products_fulls()->where('product_full_id', $product->id)->first()->pivot;
+            if ($pivotRow->count < 2) {
+                $this->order->products_fulls()->detach($product->id);
+            } else {
+                $pivotRow->count--;
+                $pivotRow->update();
+            }
+        }
+    }
 
     public function addProduct(Product $product) {
         
@@ -66,6 +81,28 @@ class Basket
             $this->order->user_id = Auth::id();
             $this->order->save();
         }
+    }
+    
+    public function addProductFull(ProductFull $product) {
+        
+        if ($this->order->products_fulls->contains($product->id)) {
+            $pivotRow = $this->order->products_fulls()->where('product_full_id', $product->id)->first()->pivot;
+            $pivotRow->count++;
+            $pivotRow->update();
+        } else {
+            $this->order->products_fulls()->attach($product->id);
+        }
+        
+       
+
+        if (Auth::check()) {
+            $this->order->user_id = Auth::id();
+            $this->order->save();
+        }
+        
+        $this->order->save();
+        
+        
     }
 
 

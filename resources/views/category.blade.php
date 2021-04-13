@@ -1,18 +1,29 @@
 @extends('layouts.master')
-
-@section('title') @lang('main.category') {{$category->__('name')}}@endsection
+@section('title') @lang('main.category') @if(isset($category)) {{$category->__('name')}} @else Страница не найдено @endif @endsection
 
 @section('content')
-    <h1>
-        {{$category->__('name')}} {{$category->products->count()}}
-    </h1>
-    <p>
-        {{ $category->__('description') }}
-    </p>
-    <img src="{{Storage::url($category->image)}}" alt="">
-    <div class="row">
-        @foreach($category->products as $product)
-            @include('layouts.card', compact('product'))
-        @endforeach
+    <div class="category-only standart">
+        
+        <div class="container">
+            <h1>
+                 @if(isset($category)) {{$category->__('name')}} @else Категория не найдено @endif 
+            </h1>
+            <div class="row">
+                <div class="d-fl product-block">
+                    <!-- Продукты с 2 типами шаблона (полный и короткий) -->
+                    @if(isset($category)) 
+                        @foreach($category->products_fulls as $product)
+                            @include('layouts.card_full', compact('product'))
+                        @endforeach
+                        
+                        @foreach($category->products as $product)
+                            @include('layouts.card', compact('product'))
+                        @endforeach
+                        
+                    @endif
+                </div>
+                 
+            </div>
+        </div>
     </div>
 @endsection

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Product;
+use App\Models\ProductFull;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
@@ -9,6 +11,12 @@ class Order extends Model
     public function products()
     {
         return $this->belongsToMany(Product::class)->withPivot('count')->withTimestamps();
+
+    }
+    
+    public function products_fulls()
+    {
+        return $this->belongsToMany(ProductFull::class)->withPivot('count')->withTimestamps();
 
     }
 
@@ -23,10 +31,16 @@ class Order extends Model
     public function getFullPrice()
     {
         $sum = 0;
-        foreach ($this->products as $product) {
+        foreach($this->products()->get() as $product) {
             $sum += $product->getPriceForCount();
         }
+        
+        foreach($this->products_fulls()->get() as $product) {
+            $sum += $product->getPriceForCount();
+        }
+        
         return $sum;
+        
     }
 
     public function saveOrder($name, $phone, $user_id, $email)

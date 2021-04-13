@@ -11,6 +11,8 @@ class CurrencySeeder extends Seeder
      */
     public function run()
     {
+        
+
         // DB::table('currencies')->truncate();
         DB::table('currencies')->insert([
             [
@@ -23,13 +25,13 @@ class CurrencySeeder extends Seeder
                 'code' => 'RUB',
                 'symbol' => '₽',
                 'is_main' => 0,
-                'rate' => 5.66,
+                'rate' => 6.5,
             ],
             [
                 'code' => 'USD',
                 'symbol' => '$',
                 'is_main' => 0,
-                'rate' => 416.8,
+                'rate' => 430.5,
             ],
         ]);
     }

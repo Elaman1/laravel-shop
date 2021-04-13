@@ -91,6 +91,14 @@
                                 <label class="btn btn-default btn-file">
                                     Загрузить <input type="file" style="display: none;" name="image" id="image">
                                 </label>
+                                @isset($category)
+                                
+                                    <p style="margin-top: 20px;"><img src="{{ asset('storage/'.$category->image) }}"
+                                 height="240px"></p>
+                                @else
+                                     
+                             
+                                @endisset
                             </div>
                         </div>
                         <button class="btn btn-success">Сохранить</button>

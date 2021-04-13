@@ -56,28 +56,38 @@
                     <label for="category_id" class="col-sm-2 col-form-label">Категория: </label>
                     <div class="col-sm-6">
                         @include('auth.layouts.error', ['fieldName' => 'category_id'])
+                       
+                     
                         <select required name="category_id" id="category_id" class="form-control">
-                            @foreach($categories as $category)
-                                <option value="{{ $category->id }}"
-                                        @isset($product)
-                                        @if($product->category_id == $category->id)
-                                        selected
-                                    @endif
-                                    @endisset
-                                >{{ $category->name }}</option>
-                            @endforeach
+                            
+                                @foreach($categories as $category)
+                                   
+                                    <option value="{{ $category->id }}"
+                                            @isset($product)
+                                            @if($product->category_id == $category->id)
+                                            selected
+                                        @endif
+                                        @endisset
+                                    >{{ $category->name }}</option>
+                                    
+                                @endforeach
+                            
                         </select>
+                       
+                                
+                            
                     </div>
                 </div>
                 <br>
+                
                 <div class="input-group row">
                     <label for="description" class="col-sm-2 col-form-label">Описание: </label>
                     <div class="col-sm-6">
                         @include('auth.layouts.error', ['fieldName' => 'description'])
-                        <textarea required name="description" id="description" cols="72"
-                                  rows="7">{{ old('description', isset($product) ? $product->description : null)}}</textarea>
+                        <textarea class="summernote" rows="5" style="width: 100%" required name="description" id="description">{{ old('description', isset($product) ? $product->description : null)}}</textarea>
                     </div>
                 </div>
+                
                 <br>
                 <div class="input-group row">
                     <label for="name" class="col-sm-2 col-form-label">Цена: </label>
@@ -92,7 +102,7 @@
                     <label for="description" class="col-sm-2 col-form-label">Описание en: </label>
                     <div class="col-sm-6">
                         @include('auth.layouts.error', ['fieldName' => 'description_en'])
-                        <textarea name="description_en" id="description_en" cols="72"
+                        <textarea class="summernote" name="description_en" id="description_en" style="width: 100%"
                                     rows="7">{{ old('description_en', isset($product) ? $product->description_en : null)}}</textarea>
                     </div>
                 </div>
@@ -103,11 +113,20 @@
                         <label class="btn btn-default btn-file">
                             Загрузить <input type="file" style="display: none;" name="image" id="image">
                         </label>
+                        @isset($product)
+                                
+                            <p style="margin-top: 20px;"><img src="{{ asset('storage/'.$product->image) }}"
+                         height="240px"></p>
+                        @else
+                             
+                     
+                        @endisset
                     </div>
                 </div>
+                
                 <br>
 
-                <div class="input-group row">
+                <!-- <div class="input-group row">
                     <label for="category_id" class="col-sm-2 col-form-label">Свойства товара: </label>
                     <div class="col-sm-6">
                         @include('auth.layouts.error', ['fieldName' => 'property_id[]'])
@@ -134,9 +153,26 @@
                         </div>
                     </div>
                     <br>
+                @endforeach -->
+                @foreach ([
+                'amulet' => 'Новые Амулеты',
+                'neww' => 'Новинка'
+                ] as $field => $title)
+                    <div class="form-group row">
+                        <label for="code" class="col-sm-2 col-form-label">{{ $title }}: </label>
+                        <div class="col-sm-10">
+                            <input type="checkbox" name="{{$field}}" id="{{$field}}"
+                            @if(isset($product) && $product->$field === 1)
+                                   checked="'checked"
+                                @endif
+                            >
+                        </div>
+                    </div>
+                    <br>
                 @endforeach
                 <button class="btn btn-success">Сохранить</button>
             </div>
         </form>
+        
     </div>
 @endsection

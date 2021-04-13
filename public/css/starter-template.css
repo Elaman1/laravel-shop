@@ -3,7 +3,6 @@ body {
 }
 
 .starter-template {
-    padding: 20px 15px;
     text-align: center;
 }
 
@@ -75,7 +74,128 @@ a {
 img {
     max-width: 100%;
 }
+.category-only h3 {
+    font-size: 20px;
+}
+.category-only .col-sm-6.col-md-4 .thumbnail .caption {
+    min-height: 230px;
+    position: relative;
+}
 
-.col-sm-6.col-md-4 .thumbnail {
-    height: 360px;
+
+header a {
+    transition: color ease .3s;
+}
+
+header a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+
+@media(max-width: 600px) {
+    .collapse.navbar-collapse {
+        display: block;
+        clear: both;
+    }
+    
+    
+    .navbar-fixed-top {
+        position: static;
+    }
+    
+    #app {
+        padding-top: 0px!important;
+    }
+    
+    a.btn.btn-success {
+        float: none!important;
+        margin: 20px 0px;
+    }
+    
+    
+    
+    body {
+        padding-top: 0px!important;
+    }
+    
+    #app .col-md-12 {
+        overflow: scroll;
+    }
+    
+    .btn-group form {
+        margin-left: 0px!important;
+    }
+    
+    .btn-group a.btn {
+        margin-top: 0px!important;
+    }
+}
+
+
+
+.table>tbody>tr>td {
+    max-width: 440px;
+}
+
+.product-only ul {
+    padding-left: 20px;
+}
+
+@media(min-width: 600px) {
+    .mt40 {
+        display: inline-block;
+        margin-top: 120px;
+    }
+}
+
+.product-only ul li {
+    list-style: disc;
+}
+
+.product-block {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.categories .solo {
+    display: none!important;
+}
+
+.caption {
+    text-align: center;
+}
+
+.form-prod > * {
+    margin-bottom: 8px;
+}
+
+.card-block {
+    width: 320px;
+}
+
+.inp-cust {
+    display: inline-block;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.form-prod > * {
+    width: 40px;
+    padding: 5px;
+    margin-right: 5px;
+}
+
+
+.btn-del {
+    background-image: url(../img/delete.png)!important;
+    background-size: 25px 25px ;
+    background-position: center center;
+    background-repeat: no-repeat;
 }

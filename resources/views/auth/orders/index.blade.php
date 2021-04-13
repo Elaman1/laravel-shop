@@ -33,23 +33,32 @@
                 <td>{{ $order->name }}</td>
                 <td>{{ $order->phone }}</td>
                 <td>{{ $order->created_at->format('H:i d/m/Y ') }}</td>
-                <td>{{ $order->getFullPrice() }} руб</td>
+                <td>{{ $order->getFullPrice() }} {{ App\Models\Currency::byCode(session('currency', 'KZT'))->first()->symbol}}</td>
                 <td>
                     <div class="btn-group" role="group">
-                        <a class="btn btn-success" type="button"
-                                @admin
-                                    href="{{route('show', $order)}}"
-                                @else
-                                    href="{{route('person.orders.show', $order)}}"
-                                @endadmin
-                            >Открыть</a>
+                        <a class="btn btn-success" style="border-radius: 5px;" type="button"
+                          @admin
+                              href="{{route('show', $order)}}"
+                          @else
+                              href="{{route('person.orders.show', $order)}}"
+                          @endadmin
+                        >Открыть</a>
+                        <form style="float: left; margin-left: 10px;" action="{{ route('orders.destroy', $order) }}" method="post">
+                          @csrf
+                          @method('DELETE')
+                          <input class="btn btn-danger" type="submit" value="Удалить">
+                        </form>
+                            
                     </div>
                 </td>
             </tr>
+            
             @endforeach
             </tbody>
             {{$orders->links()}}
         </table>
         <!-- tadd -->
     </div>
+
+  
 @endsection

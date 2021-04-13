@@ -1,0 +1,345 @@
+
+.banner-shop .content-shop {
+    width: 100%;
+    z-index: 10;
+}
+
+.banner-shop {
+    overflow: hidden;
+    height: 85vh;
+    background: #000;
+    position: relative;
+}
+
+h3, h2, h1 {
+    margin: 0px;
+}
+
+.content-shop h3 {
+    font-size: 45px;
+    color: #EBD570;
+    font-weight: bold;
+}
+
+.content-shop p {
+    color: #fff;
+    font-size: 20px;
+    margin: 10px 0px 30px;
+    max-width: 800px;
+}
+
+.content-shop h1 {
+    font-size: 60px;
+    color: #EBD570;
+    font-weight: bold;
+}
+
+.main-circle {
+    opacity: .3;
+}
+
+.banner-shop .container {
+    display: flex;
+    align-items: flex-end;
+    height: 100%;
+    position: relative;
+    flex-direction: column;
+}
+
+.banner-shop .main-circle {
+    width: 70%;
+    top: -65%;
+    margin-left: -29%;
+    margin-right: 600px;
+}
+
+.video {
+    background: #CCBF92;
+    position: relative;
+    padding: 40px 0px;
+    font-size: 16px;
+    overflow: hidden;
+}
+
+.video p{
+    font-size: 16px;
+    padding-bottom: 10px;
+}
+
+.video-video {
+    background-color: #ccc;
+    height: 500px;
+    max-width: 800px;
+    margin: 0px auto;
+}
+
+.video:before {
+    content: '';
+    width: 300px;
+    height: 300px;
+    background: url(../img/mandala.png) no-repeat;
+    background-size: 100%;
+    position: absolute;
+    background-position: center;
+    top: -17%;
+    left: -150px;
+    opacity: .4;
+}
+
+.video:after {
+    content: '';
+    width: 450px;
+    height: 450px;
+    background: url(../img/mandala.png) no-repeat;
+    background-size: 100%;
+    position: absolute;
+    background-position: center;
+    bottom: -17%;
+    right: -150px;
+    opacity: .4;
+}
+
+.video .container {
+    z-index: 10;
+    position: relative;
+}
+
+
+
+.amulet {
+    background: #000;
+    color: #fff;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    font-size: 12px;
+    position: relative;
+    z-index: 10;
+}
+
+.amulet .logo-red {
+    width: 80px;
+    height: 80px;
+}
+
+.amulet h2 {
+    font-size: 50px;
+    color: #ebd570;
+    width: calc(100% - 80px);
+    text-align: center;
+}
+
+.amulet .content {
+    padding-left: 80px;
+    position: relative;
+}
+
+.amulet .content p {
+    font-size: 16px;
+    text-align: center;
+    line-height: 1.8;
+    width: 90%;
+    margin: 0px auto;
+}
+
+.amulet .btn {
+    margin: 20px auto;
+    width: fit-content;
+    display: block!important;
+}
+
+.ver4 {
+    width: 295px;
+    top: 135px;
+    left: -120px;
+}
+
+.btn.send {
+    background: #B20405;
+    display: inline-block;
+    color: #fff;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 0px;
+    text-decoration: none;
+    transition: transform .3s;
+}
+
+.amulet .amul-image {
+    position: absolute;
+    right: -15%;
+    opacity: .4;
+    top: 0px;
+    width: 550px;
+    z-index: 0;
+    height: 550px;
+}
+
+.amulet .container {
+    position: relative;
+    z-index: 10;
+}
+
+.content-shop-m {
+    overflow: hidden;
+}
+
+.categories .container {
+    z-index: 20;
+}
+
+.categories {
+    background: #E1D49E;
+    position: relative;
+    padding: 50px 0px;
+}
+
+.categories:after {
+    content: '';
+    width: 450px;
+    height: 450px;
+    background: url(../img/mandala.png) no-repeat;
+    background-size: 100%;
+    position: absolute;
+    background-position: center;
+    bottom: 10%;
+    right: -150px;
+    opacity: .4;
+}
+
+
+
+.categories .category {
+    background: #fff;
+    height: 200px;
+    width: 265px;
+    margin: 10px;
+    overflow: hidden;
+}
+
+.video:before, .video:after, .amulet .amul-image, .categories:after {
+    -webkit-animation-name: rotation;
+    -webkit-animation-duration: 55s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-name: rotation;
+    -moz-animation-duration: 55s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: rotation;
+    -o-animation-duration: 55s;
+    -o-animation-iteration-count: infinite;
+    -o-animation-timing-function: linear;
+    animation-name: rotation;
+    animation-duration: 55s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@media(max-width: 640px) {
+    .banner-shop .container {
+        padding-right: 100px;
+    }
+}
+
+
+
+@media(max-width: 590px) {
+    .social-lent.ver1 {
+        display: none;
+    }
+
+    .categories .category {
+        width: 300px;
+        margin: 20px auto;
+    }
+
+    .amulet .d-fl {
+        display: flex;
+    }
+}
+
+
+@media(max-width: 460px) {
+    .amulet .d-fl {
+        display: block;
+    }
+
+    .banner-shop {
+        height: fit-content;
+    }
+
+    .content-shop h1 {
+        font-size: 40px;
+    }
+
+    .content-shop h3 {
+        font-size: 35px;
+    }
+
+    .amulet .logo-red {
+        display: block;
+        margin: 0px auto;
+    }
+
+    .amulet h2 {
+        width: 100%;
+    }
+
+    .ver4 {
+        display: none;
+    }
+
+    .amulet .content {
+        padding-left: 0px;
+    }
+
+    .menu a {
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+
+    .video-video {
+        height: 300px;
+    }
+}
+
+
+.categories a {
+    position: relative;
+    max-width: 100%;
+    display: flex;
+    height: inherit;
+    justify-content: space-around;
+    align-items: center;
+    overflow: hidden;
+}
+.categories img {
+    height: 100%;
+    width: auto;
+    max-width: fit-content;
+} 
+.categories .categor {
+    position: relative;
+    transition: transform .3s ease; 
+    margin-bottom: 20px;
+    height: 200px;
+}
+
+.categories .solo {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    text-align: left;
+    justify-content: center;
+    padding-left: 140px;
+    color: #fff;
+}
+
+.categories .categor:hover {
+    transform: scale(1.03);
+}

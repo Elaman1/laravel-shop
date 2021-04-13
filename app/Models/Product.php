@@ -21,8 +21,11 @@ class Product extends Model
         'hit',
         'new',
         'recommend',
+        'neww',
+        'amulet',
         'name_en', 
-        'description_en'
+        'description_en',
+        'sections'
     ];
 
     public function category()
@@ -32,9 +35,28 @@ class Product extends Model
 
     public function getPriceForCount() {
         if (!is_null($this->pivot)) {
+            
+            if (session('currency')  == 'USD') {
+            return round($this->pivot->count * $this->price / 416.8, 2);
+            }
+    
+            if (session('currency')  == 'RUB') {
+                return round($this->pivot->count * $this->price / 5.66, 2);
+            }
+            
             return $this->pivot->count * $this->price;
         }
+        
+        if (session('currency')  == 'USD') {
+            return round($this->price / 416.8, 2);
+        }
+
+        if (session('currency')  == 'RUB') {
+            return round($this->price / 5.66, 2);
+        }
+        
         return $this->price;
+        
     }
 
     public function scopeByCode($query, $code) {
@@ -65,6 +87,22 @@ class Product extends Model
     public function setRecommendAttribute($value) {
         $this->attributes['recommend'] = $value === 'on' ? 1 : 0;
     }
+
+    public function setNewwAttribute($value) {
+        $this->attributes['neww'] = $value === 'on' ? 1 : 0;
+    }
+    public function setAmuletAttribute($value) {
+        $this->attributes['amulet'] = $value === 'on' ? 1 : 0;
+    }
+
+    public function isNeww() {
+        return $this->neww === 1;
+    }
+
+    public function isamulet() {
+        return $this->amulet === 1;
+    }
+
 
     public function isHit() {
         return $this->hit === 1;

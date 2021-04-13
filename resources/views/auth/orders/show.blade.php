@@ -31,19 +31,21 @@
                                     </a>
                                 </td>
                                 <td><span class="badge"> {{ $product->pivot->count }}</span></td>
-                                <td>{{ $product->price }}p </td>
-                                <td>{{ $product->getPriceForCount() }}p </td>
+                                <td>{{ $product->getPriceAttributes($product->price) }}{{ App\Models\Currency::byCode(session('currency', 'KZT'))->first()->symbol}} </td>
+                                <td>{{ $product->getPriceForCount() }}{{ App\Models\Currency::byCode(session('currency', 'KZT'))->first()->symbol}} </td>
                             </tr>
                         @endforeach
                         <tr>
                             <td colspan="3">Общая стоимость:</td>
-                            <td>{{ $order->getFullPrice() }} p</td>
+                            <td>{{ $order->getFullPrice() }} {{ App\Models\Currency::byCode(session('currency', 'KZT'))->first()->symbol}}</td>
                         </tr>
                         
                         </tbody>
                     </table>
                     <br>
+                    
                 </div>
+                
             </div>
         </div>
     </div>
